@@ -1,0 +1,50 @@
+schema: spec-driven
+
+context: |
+  Project: LinkedIn Profile Enhancer
+
+  Product goal:
+  Build a web application that helps users improve LinkedIn profiles through
+  AI-assisted profile analysis, recommendations, rewriting suggestions, and
+  guided enhancement workflows.
+
+  Primary tech stack:
+  - UI: React for the web frontend.
+  - API and application services: C#/.NET for HTTP APIs, core services, domain
+    logic, integrations, and background workers.
+  - Agent runtime: Python for AI/agent orchestration, using frameworks such as
+    LangGraph where useful.
+  - LLM runtime: locally hosted Llama-family models or compatible local LLMs
+    for agent reasoning and content generation.
+  - Deployment: Docker containers orchestrated with Kubernetes, deployable to
+    any major cloud platform.
+
+  Architecture preferences:
+  - Keep the React UI, .NET API/services, and Python agent runtime as clearly
+    separated deployable components.
+  - Prefer API contracts and explicit service boundaries over tight coupling
+    between frontend, backend, and agent services.
+  - Use background workers for long-running profile analysis, LLM calls,
+    document parsing, enrichment, and other asynchronous tasks.
+  - Design agent workflows so they can run against local LLMs first, while
+    leaving room for future hosted-model adapters if needed.
+  - Treat Docker and Kubernetes manifests/Helm/Kustomize choices as part of
+    the delivery plan for production-ready features.
+
+  Engineering conventions:
+  - Favor maintainable, testable, production-oriented code over prototypes.
+  - Capture important decisions in design artifacts before implementation.
+  - Include security, privacy, observability, and deployment considerations
+    when a feature touches profile data, LLM processing, background jobs, or
+    cloud infrastructure.
+
+rules:
+  proposal:
+    - State which application areas are affected: React UI, .NET API/services, Python agents, local LLM runtime, deployment, or shared contracts.
+    - Include non-goals for each feature so scope remains clear.
+  design:
+    - Describe service boundaries, API contracts, async/background processing, and agent workflow changes when relevant.
+    - Call out Docker/Kubernetes deployment impact for new runtime components or infrastructure changes.
+  tasks:
+    - Break work into independently verifiable tasks across UI, backend, agents, infrastructure, and tests.
+    - Include validation steps for local development and containerized execution when relevant.
