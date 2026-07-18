@@ -1,1 +1,1 @@
-This project will develop a tool for LinkedIn profile enhancement
+This project will develop a tool for LinkedIn profile enhancement.
