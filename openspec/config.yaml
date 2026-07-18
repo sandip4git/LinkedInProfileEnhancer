@@ -16,6 +16,8 @@ context: |
     LangGraph where useful.
   - LLM runtime: locally hosted Llama-family models or compatible local LLMs
     for agent reasoning and content generation.
+  - Profile persistence: MongoDB stores profile context, normalized sections,
+    workflow state, analysis results, recommendations, and improved drafts.
   - Deployment: Docker containers orchestrated with Kubernetes, deployable to
     any major cloud platform.
 
@@ -25,7 +27,13 @@ context: |
   - Prefer API contracts and explicit service boundaries over tight coupling
     between frontend, backend, and agent services.
   - Use background workers for long-running profile analysis, LLM calls,
-    document parsing, enrichment, and other asynchronous tasks.
+    permitted public-profile retrieval, normalization, enrichment, and other
+    asynchronous tasks.
+  - Use a generated profileId as the cross-service workflow identifier. Services
+    load only the profile data they need from MongoDB; the React UI accesses it
+    only through the .NET API.
+  - Deduplicate re-ingestion using a protected fingerprint derived from
+    normalized email and mobile number. Do not expose or log raw contact data.
   - Design agent workflows so they can run against local LLMs first, while
     leaving room for future hosted-model adapters if needed.
   - Treat Docker and Kubernetes manifests/Helm/Kustomize choices as part of
